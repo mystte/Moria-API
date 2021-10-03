@@ -1,6 +1,8 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
+import type { NextApiRequest, NextApiResponse } from 'next';
+import { Level } from '../../../src/Models/index';
+import { connectToDatabase } from "../../../src/utils";
 
-export default function userHandler(
+export default async function userHandler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
@@ -11,19 +13,16 @@ export default function userHandler(
 
   switch (method) {
     case 'GET':
-      // Get data from your database
-      res.status(200).json({
-        message: `GET Level ${id}`
-      })
-      break
-    case 'PUT':
-      // Update data in your database
-      res.status(200).json({
-        message: `PUT Level ${id}`
-      })
+      try {
+        await connectToDatabase();
+        const level = await Level.findOne({ levelId: id });
+        res.status(200).json({ level });
+      } catch(err) {
+        res.status(500).json({ message: 'unexpectedError' });
+      }
       break
     default:
-      res.setHeader('Allow', ['GET', 'PUT'])
+      res.setHeader('Allow', ['GET'])
       res.status(405).end(`Method ${method} Not Allowed`)
   }
 }
