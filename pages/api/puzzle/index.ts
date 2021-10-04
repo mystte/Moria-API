@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import ILevel from '../../../src/interfaces/ILevel';
-import { Level } from '../../../src/Models/index';
+import IPuzzle from '../../../src/interfaces/IPuzzle';
+import { Puzzle } from '../../../src/Models/index';
 import { connectToDatabase } from "../../../src/utils";
 
 export default async function userHandler(
@@ -15,17 +15,17 @@ export default async function userHandler(
   if (method === 'POST') {
     try {
       await connectToDatabase();
-      const newLevel = new Level(body);
-      const saved: ILevel = await newLevel.save()
-      res.status(200).json({ data: saved ? { levelId: saved.levelId } : null })
+      const newPuzzle = new Puzzle(body);
+      const saved: IPuzzle = await newPuzzle.save()
+      res.status(200).json({ data: saved ? { puzzleId: saved.puzzleId } : null })
     } catch(err) {
       res.status(500).json({ message: 'unexpectedError' });
     }
   } else if (method === 'GET') {
     try {
       await connectToDatabase();
-      const levels = await Level.find();
-      res.status(200).json({ levels });
+      const puzzles = await Puzzle.find();
+      res.status(200).json({ puzzles });
     } catch(err) {
       res.status(500).json({ message: 'unexpectedError' });
     }
