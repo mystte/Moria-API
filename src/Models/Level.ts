@@ -4,8 +4,8 @@ import ILevel from "../interfaces/ILevel";
 
 const LevelSchema: Schema = new Schema({
   levelId: { type: String, default: () => uuidv4() },
-  name: { type: String },
-  data: { type: Object }
+  name: { type: String, required: true},
+  data: { type: Object, required: true }
 })
 
 

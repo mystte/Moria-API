@@ -1,5 +1,5 @@
 export default interface IPuzzle extends Document {
-  puzzleId: string,
+  puzzleId: string | string[],
   name: string,
   blob: string,
 }
