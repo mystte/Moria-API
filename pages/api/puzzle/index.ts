@@ -24,7 +24,7 @@ export default async function userHandler(
   } else if (method === 'GET') {
     try {
       await connectToDatabase();
-      const puzzles = await Puzzle.find();
+      const puzzles = await Puzzle.find({}, {_id: 0, name: 1, puzzleId: 1});
       res.status(200).json({ puzzles });
     } catch(err) {
       res.status(500).json({ message: 'unexpectedError' });

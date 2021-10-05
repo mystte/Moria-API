@@ -24,7 +24,7 @@ export default async function userHandler(
   } else if (method === 'GET') {
     try {
       await connectToDatabase();
-      const levels = await Level.find();
+      const levels = await Level.find({}, {_id: 0, name: 1, levelId: 1});
       res.status(200).json({ levels });
     } catch(err) {
       res.status(500).json({ message: 'unexpectedError' });
