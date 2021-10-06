@@ -17,7 +17,7 @@ export default async function userHandler(
       await connectToDatabase();
       const newLevel = new Level(body);
       const saved: ILevel = await newLevel.save()
-      res.status(200).json({ data: saved ? { levelId: saved.levelId } : null })
+      res.status(200).json(saved ? { levelId: saved.levelId, name: saved.name} : {})
     } catch(err) {
       res.status(500).json({ message: 'unexpectedError' });
     }

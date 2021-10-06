@@ -15,7 +15,7 @@ export default async function userHandler(
     case 'GET':
       try {
         await connectToDatabase();
-        const level = await Level.findOne({ levelId: id });
+        const level = await Level.findOne({ levelId: id }, {_id: 0, __v: 0});
         res.status(200).json({ level });
       } catch(err) {
         res.status(500).json({ message: 'unexpectedError' });

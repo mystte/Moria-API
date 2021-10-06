@@ -5,7 +5,7 @@ import ILevel from "../interfaces/ILevel";
 const LevelSchema: Schema = new Schema({
   levelId: { type: String, default: () => uuidv4() },
   name: { type: String, required: true},
-  data: { type: Object, required: true }
+  mineMapGridObjectArray: { type: Array, required: true }
 })
 
 

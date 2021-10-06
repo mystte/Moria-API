@@ -1,5 +1,5 @@
 export default interface ILevel extends Document {
   levelId: string | string[],
   name: string,
-  blob: string,
+  mineMapGridObjectArray : Array<Object>,
 }

@@ -1,5 +1,6 @@
 export default interface IPuzzle extends Document {
   puzzleId: string | string[],
   name: string,
-  blob: string,
+  mineMapGridObjectArray: Array<Object>,
+  openingObjectArray: Array<Object>,
 }

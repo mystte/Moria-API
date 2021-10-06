@@ -17,7 +17,7 @@ export default async function userHandler(
       await connectToDatabase();
       const newPuzzle = new Puzzle(body);
       const saved: IPuzzle = await newPuzzle.save()
-      res.status(200).json({ data: saved ? { puzzleId: saved.puzzleId } : null })
+      res.status(200).json(saved ? { puzzleId: saved.puzzleId, name: saved.name } : {})
     } catch(err) {
       res.status(500).json({ message: 'unexpectedError' });
     }
