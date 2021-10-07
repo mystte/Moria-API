@@ -14,9 +14,11 @@ export default async function userHandler(
 
   if (method === 'POST') {
     try {
+      if (body.name && body.name.length > 30)
+        return res.status(400).json({ message: 'errNameTooLong' });
       await connectToDatabase();
       const newLevel = new Level(body);
-      const saved: ILevel = await newLevel.save()
+      const saved: ILevel = await newLevel.save();
       res.status(200).json(saved ? { levelId: saved.levelId, name: saved.name} : {})
     } catch(err) {
       res.status(500).json({ message: 'unexpectedError' });
