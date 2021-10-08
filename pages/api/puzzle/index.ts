@@ -14,6 +14,8 @@ export default async function userHandler(
 
   if (method === 'POST') {
     try {
+      if (!body.name || !body.mineMapGridObjectArray || !body.openingObjectArray)
+        return res.status(400).json({ message: 'errMissingParameter' });
       if (body.name && body.name.length > 30)
         return res.status(400).json({ message: 'errNameTooLong' });
       await connectToDatabase();
