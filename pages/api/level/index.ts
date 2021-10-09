@@ -12,7 +12,6 @@ export default async function userHandler(
     method,
   } = req
 
-  console.log('Body = ', body);
   if (method === 'POST') {
     try {
       if (!body.name || !body.mineMapGridObjectArray)
