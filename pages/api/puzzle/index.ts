@@ -23,6 +23,7 @@ export default async function userHandler(
       const saved: IPuzzle = await newPuzzle.save()
       res.status(200).json(saved ? { puzzleId: saved.puzzleId, name: saved.name } : {})
     } catch(err) {
+      console.debug(err);
       res.status(500).json({ message: 'unexpectedError' });
     }
   } else if (method === 'GET') {
@@ -31,6 +32,7 @@ export default async function userHandler(
       const puzzles = await Puzzle.find({}, {_id: 0, name: 1, puzzleId: 1});
       res.status(200).json({ puzzles });
     } catch(err) {
+      console.debug(err);
       res.status(500).json({ message: 'unexpectedError' });
     }
   } else {

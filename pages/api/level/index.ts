@@ -23,6 +23,7 @@ export default async function userHandler(
       const saved: ILevel = await newLevel.save();
       res.status(200).json(saved ? { levelId: saved.levelId, name: saved.name} : {})
     } catch(err) {
+      console.debug(err);
       res.status(500).json({ message: 'unexpectedError' });
     }
   } else if (method === 'GET') {
@@ -31,6 +32,7 @@ export default async function userHandler(
       const levels = await Level.find({}, {_id: 0, name: 1, levelId: 1});
       res.status(200).json({ levels });
     } catch(err) {
+      console.debug(err);
       res.status(500).json({ message: 'unexpectedError' });
     }
   } else {
